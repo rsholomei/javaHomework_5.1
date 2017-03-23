@@ -1,18 +1,18 @@
 package com.geekhub.model;
 
 public class GuestBook {
-    private Long id;
+    private Integer id;
     private String name;
     private String message;
     private Integer rating;
 
     public GuestBook(){}
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

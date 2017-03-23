@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Service
-public class GuestBookImpl extends JdbcDaoSupport implements GuestBookDao{
+public class GuestBookDaoImpl extends JdbcDaoSupport implements GuestBookDao{
 
     @Autowired
     private DataSource dataSource;
@@ -22,6 +22,7 @@ public class GuestBookImpl extends JdbcDaoSupport implements GuestBookDao{
         setDataSource(dataSource);
     }
 
+    @Override
     public void saveGuestBook(GuestBook guestBook) {
         try {
             this.getJdbcTemplate().update
@@ -32,6 +33,7 @@ public class GuestBookImpl extends JdbcDaoSupport implements GuestBookDao{
         }
     }
 
+    @Override
     public void deleteGuestBookById(int guestBook_Id) {
         try {
             this.getJdbcTemplate().update("delete from GuestBook where GuestBook_ID = ?",
@@ -41,11 +43,7 @@ public class GuestBookImpl extends JdbcDaoSupport implements GuestBookDao{
         }
     }
 
-    public GuestBook getGuestBookById(int guestBook_Id) {
-        return this.getJdbcTemplate().queryForObject("select * from GuestBook where GuestBook_ID = ?",
-                new Object[]{guestBook_Id}, new GuestBookMapper());
-    }
-
+    @Override
     public List<GuestBook> getAllGuestBook() {
         return this.getJdbcTemplate().query("select * from GuestBook",
                 new GuestBookMapper());
